@@ -9,12 +9,14 @@ import React from "react";
 // import UseEffectFetchData from "./tutorial/2-useEffect/setup/3-useEffect-fetch-data";
 // import MultipleReturns from "./tutorial/3-conditional-rendering/setup/1-multiple-returns";
 // import ShortCircut from "./tutorial/3-conditional-rendering/setup/2-short-circuit";
-import ShowHide from "./tutorial/3-conditional-rendering/setup/3-show-hide";
+// import ShowHide from "./tutorial/3-conditional-rendering/setup/3-show-hide";
+// import Forms from "./tutorial/4-forms/setup/1-controlled-inputs";
+import MultipleInputs from "./tutorial/4-forms/setup/2-multiple-inputs";
 
 function App() {
   return (
     <div className="container">
-      <ShowHide></ShowHide>
+      <MultipleInputs></MultipleInputs>
     </div>
   );
 }
