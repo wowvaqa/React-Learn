@@ -1,29 +1,10 @@
 import React, { useState, useReducer } from "react";
 import Modal from "./Modal";
 import { data } from "../../../data";
+import { reducer } from "./reducer";
 // reducer function
 
-/**
- * Funkcja reducer która jest parametrem 'useReducer' przyjmuje dwa argumenty:
- * 'state' który jest poczatkowym stanem, orac 'action' który jest akcją
- * Funkcja 'reducer' musi coś zwrócć
- */
 
-const reducer = (state, action) => {
-  if (action.type === "ADD_ITEM") {
-    const newPeople = [...state.people, action.payLoad];
-    return {
-      ...state,
-      people: newPeople,
-      isModalOpen: true,
-      modalContent: "item added",
-    };
-  }
-  if (action.type === "NO_VALUE") {
-    return { ...state, isModalOpen: true, modalContent: "Proszę wpisz imię" };
-  }
-  throw new Error("No matching action (dispatch) type");
-};
 
 const defaultState = {
   people: [],
@@ -36,6 +17,11 @@ const Index = () => {
   // Przy użyci 'useReducer' domyślna konwencja nazewnictwa to: [state, dispach]
   // state - początkowy stan; dispatch - wysyłka danych, akcja
   const [state, dispatch] = useReducer(reducer, defaultState);
+
+  /**
+   * Przechwycenie Submit formularza
+   * @param {*} event Zdarzenie
+   */
   const handleSubmit = (event) => {
     event.preventDefault();
     if (name) {
@@ -47,9 +33,18 @@ const Index = () => {
     }
   };
 
+  /**
+   * Funkcja wysyłająca infomracje do useReducer o konieczności zamknięcia modelu popOut
+   */
+  const closeModal = () => {
+    dispatch({ type: "CLOSE_MODAL" });
+  };
+
   return (
     <>
-      {state.isModalOpen && <Modal modalContent={state.modalContent} />}
+      {state.isModalOpen && (
+        <Modal closeModal={closeModal} modalContent={state.modalContent} />
+      )}
       <form onSubmit={handleSubmit} className="form">
         <div>
           <input
@@ -62,8 +57,15 @@ const Index = () => {
       </form>
       {state.people.map((person) => {
         return (
-          <div key={person.id}>
+          <div key={person.id} className="item">
             <h4>{person.name} </h4>
+            <button
+              onClick={() =>
+                dispatch({ type: "REMOVE_ITEM", payLoad: person.id })
+              }
+            >
+              Remove
+            </button>
           </div>
         );
       })}
