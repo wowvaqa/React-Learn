@@ -13,12 +13,13 @@ import React from "react";
 // import Forms from "./tutorial/4-forms/setup/1-controlled-inputs";
 // import MultipleInputs from "./tutorial/4-forms/setup/2-multiple-inputs";
 // import UseRef from "./tutorial/5-useRef/setup/1-useRef-basics";
-import UseReducer from "./tutorial/6-useReducer/setup/";
+// import UseReducer from "./tutorial/6-useReducer/setup/";
+import PropDrilling from "./tutorial/7-prop-drilling/setup/1-prop-drilling";
 
 function App() {
   return (
     <div className="container">
-      <UseReducer></UseReducer>
+      <PropDrilling></PropDrilling>
     </div>
   );
 }
